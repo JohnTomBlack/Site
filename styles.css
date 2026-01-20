@@ -1,12 +1,54 @@
 :root{--bg:#ffffff;--fg:#111111}
 *{box-sizing:border-box}
 html,body{height:100%}
+.font-loaded body{font-family: 'Luxurious Roman', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+@font-face{
+	font-family: 'Luxurious Roman';
+	src: url('fonts/LuxuriousRoman-Regular.woff2') format('woff2'),
+			 url('fonts/LuxuriousRoman-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
 body{margin:0;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:var(--bg);color:var(--fg)}
 .wrap{width:min(680px,92%);text-align:center;padding:6vh 0}
-.name{font-size:clamp(28px,6vw,48px);margin:0 0 2rem;font-weight:600}
+.name{font-size:clamp(28px,6vw,48px);margin:0 0 2rem;font-weight:600;font-family:'Luxurious Roman', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif}
 .buttons{display:grid;gap:1rem;grid-template-columns:1fr}
 @media(min-width:560px){.buttons{grid-template-columns:1fr 1fr}}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:1rem 1.25rem;font-size:1.125rem;text-decoration:none;border:2px solid var(--fg);color:var(--fg);border-radius:10px;background:transparent;transition:transform .12s ease,background .12s ease}
 .btn:hover{transform:translateY(-3px);background:rgba(0,0,0,.04)}
 .btn:active{transform:translateY(0)}
 .btn:focus{outline:3px solid rgba(0,0,0,.12);outline-offset:3px}
+
+/* Fuzzy particle buttons */
+.fuzzy{position:relative;overflow:visible}
+.fuzzy .btn-inner{position:relative;z-index:2}
+.spots{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none}
+.spot{position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;transform:translate(-50%,-50%) scale(0.6);opacity:0;z-index:1}
+.fuzzy:hover .spot{animation: spew 900ms cubic-bezier(.2,.9,.2,1) forwards;animation-iteration-count:1}
+
+@keyframes spew{
+	from{transform:translate(-50%,-50%) scale(.4);opacity:0}
+	to{transform:translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1);opacity:.85}
+}
+
+/* 16 spots with forest/olive green shades and varied offsets/delays */
+.spot:nth-child(1){--tx:-74px;--ty:-6px;background:#254b2b;animation-delay:0s}
+.spot:nth-child(2){--tx:-56px;--ty:6px;background:#2f4f2f;animation-delay:.04s}
+.spot:nth-child(3){--tx:-30px;--ty:-26px;background:#3b6a3b;animation-delay:.06s}
+.spot:nth-child(4){--tx:-12px;--ty:-40px;background:#2e5d38;animation-delay:.08s}
+.spot:nth-child(5){--tx:12px;--ty:-46px;background:#3a6b45;animation-delay:.10s}
+.spot:nth-child(6){--tx:36px;--ty:-28px;background:#435e2f;animation-delay:.12s}
+.spot:nth-child(7){--tx:58px;--ty:-6px;background:#556b2f;animation-delay:.14s}
+.spot:nth-child(8){--tx:70px;--ty:18px;background:#475331;animation-delay:.16s}
+.spot:nth-child(9){--tx:54px;--ty:40px;background:#2f5b3a;animation-delay:.18s}
+.spot:nth-child(10){--tx:28px;--ty:52px;background:#33593a;animation-delay:.20s}
+.spot:nth-child(11){--tx:4px;--ty:60px;background:#3f6a3f;animation-delay:.22s}
+.spot:nth-child(12){--tx:-24px;--ty:46px;background:#2b4f2b;animation-delay:.24s}
+.spot:nth-child(13){--tx:-46px;--ty:30px;background:#27462a;animation-delay:.26s}
+.spot:nth-child(14){--tx:-60px;--ty:12px;background:#233f26;animation-delay:.28s}
+.spot:nth-child(15){--tx:-36px;--ty:-12px;background:#2b5a33;animation-delay:.30s}
+.spot:nth-child(16){--tx:8px;--ty:-24px;background:#2e6a3c;animation-delay:.32s}
+
+/* Slightly enlarge button inner when hovered for contrast */
+.fuzzy:hover .btn-inner{transform:translateY(-3px);transition:transform .12s}

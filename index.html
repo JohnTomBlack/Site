@@ -32,5 +32,46 @@
         </a>
     </div>
   </main>
+  <!-- Randomize spot positions and retrigger bursts -->
+  <script>
+    (function(){
+      const fuzzies = document.querySelectorAll('.fuzzy');
+      function randomizeSpots(fuzzy){
+        const rect = fuzzy.getBoundingClientRect();
+        const spots = fuzzy.querySelectorAll('.spot');
+        spots.forEach((spot)=>{
+          const angle = Math.random()*Math.PI*2;
+          const dist = (Math.random()*0.4 + 0.18) * Math.max(rect.width, rect.height);
+          const tx = Math.cos(angle)*dist;
+          const ty = Math.sin(angle)*dist;
+          const txPercent = (tx / rect.width) * 100;
+          const tyPercent = (ty / rect.height) * 100;
+          spot.style.setProperty('--tx', txPercent + '%');
+          spot.style.setProperty('--ty', tyPercent + '%');
+          const size = 6 + Math.round(Math.random()*10);
+          spot.style.width = size + 'px';
+          spot.style.height = size + 'px';
+          spot.style.borderRadius = (40 + Math.random()*60) + '%';
+          spot.style.animationDelay = (Math.random()*0.35) + 's';
+          spot.classList.remove('spew');
+          void spot.offsetWidth;
+        });
+      }
+      fuzzies.forEach(f=>{
+        if (!f) return;
+        randomizeSpots(f);
+        f.addEventListener('pointerenter', ()=>{
+          randomizeSpots(f);
+          const spots = f.querySelectorAll('.spot');
+          spots.forEach(s=>{
+            s.classList.add('spew');
+            const onEnd = ()=>{ s.classList.remove('spew'); s.removeEventListener('animationend', onEnd); };
+            s.addEventListener('animationend', onEnd);
+          });
+        });
+        window.addEventListener('resize', ()=> randomizeSpots(f));
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -23,32 +23,36 @@ body{margin:0;display:flex;align-items:center;justify-content:center;font-family
 /* Fuzzy particle buttons */
 .fuzzy{position:relative;overflow:visible}
 .fuzzy .btn-inner{position:relative;z-index:2}
-.spots{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none}
-.spot{position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;transform:translate(-50%,-50%) scale(0.6);opacity:0;z-index:1}
-.fuzzy:hover .spot{animation: spew 900ms cubic-bezier(.2,.9,.2,1) forwards;animation-iteration-count:1}
+.spots{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.spot{position:absolute;left:50%;top:50%;width:9px;height:9px;border-radius:50%;transform:translate(-50%,-50%) scale(0.6);opacity:0;z-index:1}
+.spot.spew{animation: spew 900ms cubic-bezier(.2,.9,.2,1) forwards;animation-iteration-count:1}
 
 @keyframes spew{
-	from{transform:translate(-50%,-50%) scale(.4);opacity:0}
-	to{transform:translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1);opacity:.85}
+	0%{transform:translate(-50%,-50%) scale(.4);opacity:0}
+	60%{opacity:.9}
+	100%{transform:translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1);opacity:0}
 }
 
-/* 16 spots with forest/olive green shades and varied offsets/delays */
-.spot:nth-child(1){--tx:-74px;--ty:-6px;background:#254b2b;animation-delay:0s}
-.spot:nth-child(2){--tx:-56px;--ty:6px;background:#2f4f2f;animation-delay:.04s}
-.spot:nth-child(3){--tx:-30px;--ty:-26px;background:#3b6a3b;animation-delay:.06s}
-.spot:nth-child(4){--tx:-12px;--ty:-40px;background:#2e5d38;animation-delay:.08s}
-.spot:nth-child(5){--tx:12px;--ty:-46px;background:#3a6b45;animation-delay:.10s}
-.spot:nth-child(6){--tx:36px;--ty:-28px;background:#435e2f;animation-delay:.12s}
-.spot:nth-child(7){--tx:58px;--ty:-6px;background:#556b2f;animation-delay:.14s}
-.spot:nth-child(8){--tx:70px;--ty:18px;background:#475331;animation-delay:.16s}
-.spot:nth-child(9){--tx:54px;--ty:40px;background:#2f5b3a;animation-delay:.18s}
-.spot:nth-child(10){--tx:28px;--ty:52px;background:#33593a;animation-delay:.20s}
-.spot:nth-child(11){--tx:4px;--ty:60px;background:#3f6a3f;animation-delay:.22s}
-.spot:nth-child(12){--tx:-24px;--ty:46px;background:#2b4f2b;animation-delay:.24s}
-.spot:nth-child(13){--tx:-46px;--ty:30px;background:#27462a;animation-delay:.26s}
-.spot:nth-child(14){--tx:-60px;--ty:12px;background:#233f26;animation-delay:.28s}
-.spot:nth-child(15){--tx:-36px;--ty:-12px;background:#2b5a33;animation-delay:.30s}
-.spot:nth-child(16){--tx:8px;--ty:-24px;background:#2e6a3c;animation-delay:.32s}
+/* performance hints and subtle blur for a softer, more seamless look */
+.spot{will-change:transform,opacity;filter:blur(.4px)}
+
+/* 16 spots with forest/olive green shades and percentage offsets so they scale with button size */
+.spot:nth-child(1){--tx:-37%;--ty:-6%;background:#254b2b;animation-delay:0s}
+.spot:nth-child(2){--tx:-28%;--ty:6%;background:#2f4f2f;animation-delay:.04s}
+.spot:nth-child(3){--tx:-15%;--ty:-13%;background:#3b6a3b;animation-delay:.06s}
+.spot:nth-child(4){--tx:-6%;--ty:-20%;background:#2e5d38;animation-delay:.08s}
+.spot:nth-child(5){--tx:6%;--ty:-23%;background:#3a6b45;animation-delay:.10s}
+.spot:nth-child(6){--tx:18%;--ty:-14%;background:#435e2f;animation-delay:.12s}
+.spot:nth-child(7){--tx:29%;--ty:-3%;background:#556b2f;animation-delay:.14s}
+.spot:nth-child(8){--tx:35%;--ty:9%;background:#475331;animation-delay:.16s}
+.spot:nth-child(9){--tx:27%;--ty:20%;background:#2f5b3a;animation-delay:.18s}
+.spot:nth-child(10){--tx:14%;--ty:26%;background:#21702e;animation-delay:.20s}
+.spot:nth-child(11){--tx:2%;--ty:30%;background:#3f6a3f;animation-delay:.22s}
+.spot:nth-child(12){--tx:-12%;--ty:23%;background:#2b4f2b;animation-delay:.24s}
+.spot:nth-child(13){--tx:-23%;--ty:15%;background:#27462a;animation-delay:.26s}
+.spot:nth-child(14){--tx:-30%;--ty:6%;background:#233f26;animation-delay:.28s}
+.spot:nth-child(15){--tx:-18%;--ty:-6%;background:#2b5a33;animation-delay:.30s}
+.spot:nth-child(16){--tx:4%;--ty:-12%;background:#2e6a3c;animation-delay:.32s}
 
 /* Slightly enlarge button inner when hovered for contrast */
 .fuzzy:hover .btn-inner{transform:translateY(-3px);transition:transform .12s}

@@ -1,0 +1,12 @@
+:root{--bg:#ffffff;--fg:#111111}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:var(--bg);color:var(--fg)}
+.wrap{width:min(680px,92%);text-align:center;padding:6vh 0}
+.name{font-size:clamp(28px,6vw,48px);margin:0 0 2rem;font-weight:600}
+.buttons{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:560px){.buttons{grid-template-columns:1fr 1fr}}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:1rem 1.25rem;font-size:1.125rem;text-decoration:none;border:2px solid var(--fg);color:var(--fg);border-radius:10px;background:transparent;transition:transform .12s ease,background .12s ease}
+.btn:hover{transform:translateY(-3px);background:rgba(0,0,0,.04)}
+.btn:active{transform:translateY(0)}
+.btn:focus{outline:3px solid rgba(0,0,0,.12);outline-offset:3px}

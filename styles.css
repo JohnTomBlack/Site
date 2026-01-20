@@ -1,6 +1,10 @@
 :root{
 	--bg:#ff9d6f;
 	--fg:#111111;
+	/* spot palette defaults (green) */
+	--spot-h: 139;
+	--spot-s: 100%;
+	--spot-l: 72%;
 	--shadow-color: 20deg 67% 44%;
 	--shadow-elevation-low:
 		0.6px 0.6px 1px hsl(var(--shadow-color) / 0.33),
@@ -66,22 +70,23 @@ body{margin:0;display:flex;align-items:center;justify-content:center;font-family
 .spot{will-change:transform,opacity;filter:blur(.4px)}
 
 /* 16 spots with forest/olive green shades and percentage offsets so they scale with button size */
-.spot:nth-child(1){--tx:-37%;--ty:-6%;background:hsl(139 100% 84%);animation-delay:0s}
-.spot:nth-child(2){--tx:-28%;--ty:6%;background:hsl(139 100% 82.4%);animation-delay:.04s}
-.spot:nth-child(3){--tx:-15%;--ty:-13%;background:hsl(139 100% 80.8%);animation-delay:.06s}
-.spot:nth-child(4){--tx:-6%;--ty:-20%;background:hsl(139 100% 79.2%);animation-delay:.08s}
-.spot:nth-child(5){--tx:6%;--ty:-23%;background:hsl(139 100% 77.6%);animation-delay:.10s}
-.spot:nth-child(6){--tx:18%;--ty:-14%;background:hsl(139 100% 76%);animation-delay:.12s}
-.spot:nth-child(7){--tx:29%;--ty:-3%;background:hsl(139 100% 74.4%);animation-delay:.14s}
-.spot:nth-child(8){--tx:35%;--ty:9%;background:hsl(139 100% 72.8%);animation-delay:.16s}
-.spot:nth-child(9){--tx:27%;--ty:20%;background:hsl(139 100% 71.2%);animation-delay:.18s}
-.spot:nth-child(10){--tx:14%;--ty:26%;background:hsl(139 100% 69.6%);animation-delay:.20s}
-.spot:nth-child(11){--tx:2%;--ty:30%;background:hsl(139 100% 68%);animation-delay:.22s}
-.spot:nth-child(12){--tx:-12%;--ty:23%;background:hsl(139 100% 66.4%);animation-delay:.24s}
-.spot:nth-child(13){--tx:-23%;--ty:15%;background:hsl(139 100% 64.8%);animation-delay:.26s}
-.spot:nth-child(14){--tx:-30%;--ty:6%;background:hsl(139 100% 63.2%);animation-delay:.28s}
-.spot:nth-child(15){--tx:-18%;--ty:-6%;background:hsl(139 100% 61.6%);animation-delay:.30s}
-.spot:nth-child(16){--tx:4%;--ty:-12%;background:hsl(139 100% 60%);animation-delay:.32s}
+.spot:nth-child(1){--tx:-37%;--ty:-6%;animation-delay:0s}
+ 
+.spot:nth-child(2){--tx:-28%;--ty:6%;animation-delay:.04s}
+.spot:nth-child(3){--tx:-15%;--ty:-13%;animation-delay:.06s}
+.spot:nth-child(4){--tx:-6%;--ty:-20%;animation-delay:.08s}
+.spot:nth-child(5){--tx:6%;--ty:-23%;animation-delay:.10s}
+.spot:nth-child(6){--tx:18%;--ty:-14%;animation-delay:.12s}
+.spot:nth-child(7){--tx:29%;--ty:-3%;animation-delay:.14s}
+.spot:nth-child(8){--tx:35%;--ty:9%;animation-delay:.16s}
+.spot:nth-child(9){--tx:27%;--ty:20%;animation-delay:.18s}
+.spot:nth-child(10){--tx:14%;--ty:26%;animation-delay:.20s}
+.spot:nth-child(11){--tx:2%;--ty:30%;animation-delay:.22s}
+.spot:nth-child(12){--tx:-12%;--ty:23%;animation-delay:.24s}
+.spot:nth-child(13){--tx:-23%;--ty:15%;animation-delay:.26s}
+.spot:nth-child(14){--tx:-30%;--ty:6%;animation-delay:.28s}
+.spot:nth-child(15){--tx:-18%;--ty:-6%;animation-delay:.30s}
+.spot:nth-child(16){--tx:4%;--ty:-12%;animation-delay:.32s}
 
 /* Slightly enlarge button inner when hovered for contrast */
 .fuzzy:hover .btn-inner{transform:translateY(-3px);transition:transform .12s}

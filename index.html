@@ -60,15 +60,27 @@
 
     (function(){
       const fuzzies = document.querySelectorAll('.fuzzy');
+      function shuffle(arr){
+        for (let i = arr.length - 1; i > 0; i--){
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+      }
       function randomizeSpots(fuzzy){
         const rect = fuzzy.getBoundingClientRect();
-        const spots = fuzzy.querySelectorAll('.spot');
-        spots.forEach((spot)=>{
+        const spots = Array.from(fuzzy.querySelectorAll('.spot'));
+        // build exactly 8 green and 8 purple, then shuffle
+        const paletteNames = Array(8).fill('green').concat(Array(8).fill('purple'));
+        shuffle(paletteNames);
+        const palettes = {
+          green: {h: 139, s: 100, l: 72},
+          purple: {h: 259, s: 100, l: 72}
+        };
+        spots.forEach((spot, i)=>{
           const angle = Math.random()*Math.PI*2;
           const dist = (Math.random()*0.4 + 0.18) * Math.max(rect.width, rect.height);
           const tx = Math.cos(angle)*dist;
           const ty = Math.sin(angle)*dist;
-          // Use pixel offsets so calc(-50% + var(--tx)) moves relative to the button center
           spot.style.setProperty('--tx', Math.round(tx) + 'px');
           spot.style.setProperty('--ty', Math.round(ty) + 'px');
           const size = 6 + Math.round(Math.random()*10);
@@ -76,6 +88,12 @@
           spot.style.height = size + 'px';
           spot.style.borderRadius = (40 + Math.random()*60) + '%';
           spot.style.animationDelay = (Math.random()*0.35) + 's';
+          // choose color type from shuffled array to ensure 8/8 distribution
+          const type = paletteNames[i % paletteNames.length];
+          const base = palettes[type];
+          const variation = (Math.random()*30 - 15); // +/-15
+          const l = Math.max(0, Math.min(100, base.l + variation));
+          spot.style.background = `hsl(${base.h} ${base.s}% ${l}%)`;
           spot.classList.remove('spew');
           void spot.offsetWidth;
         });
@@ -95,6 +113,8 @@
         window.addEventListener('resize', ()=> randomizeSpots(f));
       });
     })();
+
+    
   </script>
 </body>
 </html>

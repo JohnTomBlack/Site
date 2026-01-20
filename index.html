@@ -44,10 +44,9 @@
           const dist = (Math.random()*0.4 + 0.18) * Math.max(rect.width, rect.height);
           const tx = Math.cos(angle)*dist;
           const ty = Math.sin(angle)*dist;
-          const txPercent = (tx / rect.width) * 100;
-          const tyPercent = (ty / rect.height) * 100;
-          spot.style.setProperty('--tx', txPercent + '%');
-          spot.style.setProperty('--ty', tyPercent + '%');
+          // Use pixel offsets so calc(-50% + var(--tx)) moves relative to the button center
+          spot.style.setProperty('--tx', Math.round(tx) + 'px');
+          spot.style.setProperty('--ty', Math.round(ty) + 'px');
           const size = 6 + Math.round(Math.random()*10);
           spot.style.width = size + 'px';
           spot.style.height = size + 'px';

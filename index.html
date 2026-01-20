@@ -32,8 +32,32 @@
         </a>
     </div>
   </main>
-  <!-- Randomize spot positions and retrigger bursts -->
+  <!-- Split heading into boxed letters, then randomize spot positions and retrigger bursts -->
   <script>
+    // Convert the heading text into individual boxed letter spans
+    (function(){
+      const nameEl = document.querySelector('.name');
+      if (nameEl){
+        const text = nameEl.textContent || '';
+        const frag = document.createDocumentFragment();
+        for (const ch of text){
+          if (ch === ' '){
+            const sp = document.createElement('span');
+            sp.className = 'letter space';
+            sp.innerHTML = '&nbsp;';
+            frag.appendChild(sp);
+            continue;
+          }
+          const s = document.createElement('span');
+          s.className = 'letter';
+          s.textContent = ch;
+          frag.appendChild(s);
+        }
+        nameEl.textContent = '';
+        nameEl.appendChild(frag);
+      }
+    })();
+
     (function(){
       const fuzzies = document.querySelectorAll('.fuzzy');
       function randomizeSpots(fuzzy){
